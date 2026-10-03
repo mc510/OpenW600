@@ -164,7 +164,7 @@ static void tcp_server_thread(beken_thread_arg_t arg)
 	server_addr.sin_port = htons(HTTP_SERVER_PORT);/* Server listen on port: 20000 */
 	err = bind(tcp_listen_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
 
-	err = listen(tcp_listen_fd, 0);
+	err = listen(tcp_listen_fd, 4);
 
 	while (1)
 	{
