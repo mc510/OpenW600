@@ -245,6 +245,19 @@ static int connect_wifi_demo(char* ssid, char* pwd, obkStaticIP_t *ip)
 		tls_mem_free(ip_param);
 	}
 
+#if PLATFORM_W600
+	{
+	// Custom: force the stored Wi-Fi power-save setting off. The SDK reapplies
+	// the stored value on every (re)connect, and this plug's was left "on".
+		u8 psm = 1;
+		tls_param_get(TLS_PARAM_ID_PSM, &psm, TRUE);
+		if (psm) {
+			psm = 0;
+			tls_param_set(TLS_PARAM_ID_PSM, &psm, TRUE);
+		}
+	}
+#endif
+	
 	ret = tls_wifi_connect((u8*)ssid, strlen(ssid), (u8*)pwd, strlen(pwd));
 	if (WM_SUCCESS == ret)
 		wm_printf("\nplease wait connect net......\n");
