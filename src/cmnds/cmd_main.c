@@ -171,7 +171,7 @@ static commandResult_t CMD_PowerSave(const void* context, const char* cmd, const
 		tls_wifi_set_psflag(1, 0);	//Enable powersave but don't save to flash
 	}
 	else {
-		tls_wifi_set_psflag(0, 0);	//Disable powersave but don't save to flash
+		tls_wifi_set_psflag(0, 1);	//Disable powersave and save to flash
 	}
 #elif defined(PLATFORM_BL602)
 	if (bOn) {
